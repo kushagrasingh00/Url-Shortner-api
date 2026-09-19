@@ -4,10 +4,14 @@ from app.database import get_db
 from sqlalchemy.orm import Session
 from fastapi.responses import RedirectResponse
 from typing import List
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+
+base_url = os.getenv("BASE_URL")
 
 router = APIRouter(tags=['links'])
-
 
 # ROUTE - To Generate Links
 @router.post('/links',response_model=models.response_generate_link,status_code=status.HTTP_201_CREATED)
@@ -34,8 +38,8 @@ def create_link(
     db.commit()
     db.refresh(new_obj)
 
-    return {"link":f"http://localhost:8000/{new_obj.short_code}"}
-
+    base_url = os.getenv("BASE_URL")
+    return {"link": f"{base_url}/{new_obj.short_code}"}
 # ------------------------------------------------------------------------------------------------------------------------------------------
 
 # Get All links Of the User
@@ -51,7 +55,7 @@ def get_all_links(
     for link in user_links:
         results.append({
             "original_url": link.original_url,
-            "short_url": f"http://localhost:8000/{link.short_code}",
+            "short_url": f"{base_url}/{link.short_code}",
             "clicks": link.clicks,
             "created_at": link.created_at
         })
