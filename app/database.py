@@ -16,4 +16,3 @@ def get_db():
     finally:
         db.close()
 
-print(f"DATABASE_URL: {db_url}")
