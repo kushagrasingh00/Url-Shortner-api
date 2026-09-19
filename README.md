@@ -1,6 +1,13 @@
 # URL Shortener API
 
 A RESTful URL shortener API built with **FastAPI** and **PostgreSQL**.
+## Live API
+https://url-shortner-api-k077.onrender.com
+
+## API Documentation
+Interactive Swagger UI:
+
+https://url-shortner-api-k077.onrender.com/docs
 
 ## Features
 
